@@ -1,6 +1,5 @@
-package com.example.demo.bridge;
+package com.example.demo.structure.bridge;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

@@ -1,4 +1,4 @@
-package com.example.demo.bridge;
+package com.example.demo.structure.bridge;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
