@@ -6,4 +6,6 @@ package com.example.demo.builder;
  * @date: 2020/11/24 13:48
  */
 public class Product {
+    public Product(ProductProperty property){}
+    public Product(){}
 }
