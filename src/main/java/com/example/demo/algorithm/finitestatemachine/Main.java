@@ -15,6 +15,16 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
+/**
+ * @author: anjd
+ * @description:
+ * 有限状态机 的数学模型
+ * 包含 现态（Status） 转变(Transition) 表现行为(Action) 次态（Status）
+ * 这里案例我就没写Action部分， 即 当前状态 对应的feature & performance
+ * @date: 2020/11/24 17:14
+ * @param null
+ * @return
+ */
 @Configuration
 @Slf4j
 public class Main {
