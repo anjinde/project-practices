@@ -12,6 +12,7 @@ import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 import reactor.util.function.Tuple3;
 import reactor.util.function.Tuple4;
 
@@ -136,7 +137,6 @@ public class FluxMonoTest {
          Flux<Tuple4<String,String,String,String>> tuple2Flux = Flux.zip(stringFlux1,stringFlux2,stringFlux3, stringFlux4);
          tuple2Flux.subscribe(x -> log.info("->{}",x));
 
-
          Thread.sleep(Long.MAX_VALUE);
          log.info("main thread over");
      }
@@ -217,5 +217,25 @@ public class FluxMonoTest {
         });
 
         Thread.sleep(Long.MAX_VALUE);
+    }
+
+    @Test
+    public void testParallel(){
+        Flux.range(1,10)
+                /*
+                 核心部分1：
+                    通过 parallel设置并行参数
+                    默认且最高值为 cpu核数
+                 */
+                .parallel()
+                /*
+                   核心部分2:
+                       通过声明 调度器 进行策略调度
+                        elastic 为弹性调度， 会在parallel基础上，自行决策线程资源的分配
+                        parallel 映射于parallel声明的 声明线程调度器
+                        immediate 立即在主线程执行 也就没有入队调度器单独调度了
+                 */
+                .runOn(Schedulers.parallel())
+                .subscribe(x ->log.info("->{}",x));
     }
 }
